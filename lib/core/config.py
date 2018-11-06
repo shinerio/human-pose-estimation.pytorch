@@ -19,7 +19,7 @@ config = edict()
 
 config.OUTPUT_DIR = ''
 config.LOG_DIR = ''
-config.DATA_DIR = ''
+config.DATA_DIR = '/mnt/data-2'
 config.GPUS = '0'
 config.WORKERS = 4
 config.PRINT_FREQ = 20
@@ -180,7 +180,7 @@ def gen_config(config_file):
         yaml.dump(dict(cfg), f, default_flow_style=False)
 
 
-def update_dir(model_dir, log_dir, data_dir):
+def update_dir(model_dir=None, log_dir=None, data_dir=None):
     if model_dir:
         config.OUTPUT_DIR = model_dir
 

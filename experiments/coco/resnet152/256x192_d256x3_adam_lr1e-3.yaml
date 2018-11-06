@@ -7,7 +7,7 @@ PRINT_FREQ: 100
 
 DATASET:
   DATASET: 'coco'
-  ROOT: 'data/coco/'
+  ROOT: '/home/messor/data_center/coco/'
   TEST_SET: 'val2017'
   TRAIN_SET: 'train2017'
   FLIP: true
@@ -15,7 +15,7 @@ DATASET:
   SCALE_FACTOR: 0.3
 MODEL:
   NAME: 'pose_resnet'
-  PRETRAINED: 'models/pytorch/imagenet/resnet152-b121ed2d.pth'
+  PRETRAINED: '/home/messor/data_center/models/pose_estimation_msra/pytorch/imagenet/resnet152-b121ed2d.pth'
   IMAGE_SIZE:
   - 192
   - 256

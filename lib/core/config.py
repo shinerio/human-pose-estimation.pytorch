@@ -44,11 +44,12 @@ POSE_RESNET.SIGMA = 2
 
 MODEL_EXTRAS = {
     'pose_resnet': POSE_RESNET,
+    'pose_resnet_multi_stage': POSE_RESNET
 }
 
 # common params for NETWORK
 config.MODEL = edict()
-config.MODEL.NAME = 'pose_resnet'
+config.MODEL.NAME = 'pose_resnet_multi_stage'
 config.MODEL.INIT_WEIGHTS = True
 config.MODEL.PRETRAINED = ''
 config.MODEL.NUM_JOINTS = 16
@@ -204,7 +205,7 @@ def get_model_name(cfg):
     name = cfg.MODEL.NAME
     full_name = cfg.MODEL.NAME
     extra = cfg.MODEL.EXTRA
-    if name in ['pose_resnet']:
+    if name in ['pose_resnet', 'pose_resnet_multi_stage']:
         name = '{model}_{num_layers}'.format(
             model=name,
             num_layers=extra.NUM_LAYERS)

@@ -125,12 +125,12 @@ class PoseResNet(nn.Module):
 
         self.intermediate_layer = nn.Conv2d(
             in_channels=extra.NUM_DECONV_FILTERS[-1],
-            out_channels=1,
+            out_channels=cfg.MODEL.NUM_JOINTS,
             kernel_size=3,
             stride=1,
             padding=1
         )
-        self.intermediate_conv = nn.Conv2d(65, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        self.intermediate_conv = nn.Conv2d(81, 64, kernel_size=3, stride=1, padding=1, bias=False)
         self.intermediate_bn1 = nn.BatchNorm2d(64, momentum=BN_MOMENTUM)
 
         self.inplanes = 64

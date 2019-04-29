@@ -32,6 +32,16 @@ from utils.utils import create_logger
 import dataset
 import models
 
+import torch._utils
+try:
+    torch._utils._rebuild_tensor_v2
+except AttributeError:
+    def _rebuild_tensor_v2(storage, storage_offset, size, stride, requires_grad, backward_hooks):
+        tensor = torch._utils._rebuild_tensor(storage, storage_offset, size, stride)
+        tensor.requires_grad = requires_grad
+        tensor._backward_hooks = backward_hooks
+        return tensor
+    torch._utils._rebuild_tensor_v2 = _rebuild_tensor_v2
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train keypoints network')
@@ -120,7 +130,8 @@ def main():
 
     if config.TEST.MODEL_FILE:
         logger.info('=> loading model from {}'.format(config.TEST.MODEL_FILE))
-        model.load_state_dict(torch.load(config.TEST.MODEL_FILE))
+        model_dict = torch.load(config.TEST.MODEL_FILE)
+        model.load_state_dict(model_dict)
     else:
         model_state_file = os.path.join(final_output_dir,
                                         'final_state.pth.tar')
